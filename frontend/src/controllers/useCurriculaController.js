@@ -1,5 +1,6 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
+  listCurricula,
   createCurriculum,
   extractCurriculum,
 } from "../services/curriculaApi.js";
@@ -19,10 +20,36 @@ export default function useCurriculaController() {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  function handleFileChange(event) {
-    setFile(event.target.files?.[0] ?? null);
-    setFields(emptyFields);
+  const fetchCurricula = useCallback(async () => {
+    setCurricula(await listCurricula());
+  }, []);
+
+  async function extractFile(selectedFile) {
+    setLoading(true);
     setMessage("");
+    try {
+      const formData = new FormData();
+      formData.append("file", selectedFile);
+      const result = await extractCurriculum(formData);
+      setFields({ ...emptyFields, ...result.fields });
+      setMessage("Revise os dados extraídos e envie o formulário para salvar.");
+    } catch (error) {
+      setMessage(error.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function handleFileChange(event) {
+    const selectedFile = event.target.files?.[0] ?? null;
+    setFile(selectedFile);
+    setFields(emptyFields);
+    setMessage(selectedFile ? "Extraindo dados do PDF…" : "");
+    if (selectedFile) {
+      extractFile(selectedFile);
+    } else {
+      setLoading(false);
+    }
   }
 
   function handleFieldChange(event) {
@@ -35,20 +62,7 @@ export default function useCurriculaController() {
       setMessage("Selecione um PDF antes de extrair os dados.");
       return;
     }
-
-    setLoading(true);
-    setMessage("");
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
-      const result = await extractCurriculum(formData);
-      setFields({ ...emptyFields, ...result.fields });
-      setMessage("Revise os dados extraídos e envie o formulário para salvar.");
-    } catch (error) {
-      setMessage(error.message);
-    } finally {
-      setLoading(false);
-    }
+    await extractFile(file);
   }
 
   async function handleSubmit(event) {
@@ -79,6 +93,7 @@ export default function useCurriculaController() {
     fields,
     message,
     loading,
+    fetchCurricula,
     handleFileChange,
     handleFieldChange,
     handleExtract,

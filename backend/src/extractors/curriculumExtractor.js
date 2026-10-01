@@ -10,7 +10,7 @@ export function extractCurriculumFields(text) {
   const name = lines.find((line) => !headingPattern.test(line) && !emailPattern.test(line)) ?? "";
 
   return {
-    name: name.replace(phonePattern, "").trim(),
+    name: name.trim(),
     email: text.match(emailPattern)?.[0] ?? "",
     phone: text.match(phonePattern)?.[0]?.trim() ?? "",
     interestRole: "",

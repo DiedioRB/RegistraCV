@@ -1,25 +1,13 @@
+import { useEffect } from "react";
+import CurriculaList from "../components/CurriculaList.jsx";
 import useCurriculaController from "../controllers/useCurriculaController.js";
 
 export default function List() {
-  const { curricula, message, loading } = useCurriculaController();
+  const { curricula, message, loading, fetchCurricula } = useCurriculaController();
 
-  return (
-    <>
-      <section>
-        <h2>Currículos cadastrados</h2>
-        {curricula.length === 0 ? (
-          <p className="empty">Nenhum currículo cadastrado ainda.</p>
-        ) : (
-          <ul className="documents">
-            {curricula.map((curriculum) => (
-              <li key={curriculum.id}>
-                <span>{curriculum.name} · {curriculum.email}</span>
-                <time>{new Date(curriculum.createdAt).toLocaleString("pt-BR")}</time>
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
-    </>
-  )
+  useEffect(() => {
+    fetchCurricula();
+  }, curricula);
+
+  return <CurriculaList curricula={curricula} message={message} loading={loading} />;
 }
