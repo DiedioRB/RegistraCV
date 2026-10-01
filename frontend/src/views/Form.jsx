@@ -57,7 +57,7 @@ export default function Form() {
             id="resumee"
             name="resumee"
             rows="6"
-            value={fields.Resumee}
+            value={fields.resumee}
             onChange={handleFieldChange}
           />
         </label>
