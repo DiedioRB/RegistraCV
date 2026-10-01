@@ -7,7 +7,7 @@ export default function List() {
 
   useEffect(() => {
     fetchCurricula();
-  }, curricula);
+  }, [fetchCurricula]);
 
   return <CurriculaList curricula={curricula} message={message} loading={loading} />;
 }
