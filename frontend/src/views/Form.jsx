@@ -1,4 +1,4 @@
-import usecurriculaController from "../controllers/usecurriculaController.js";
+import usecurriculaController from "../controllers/useCurriculaController.js";
 
 const formFields = [
   { name: "name", label: "Nome", required: true },
