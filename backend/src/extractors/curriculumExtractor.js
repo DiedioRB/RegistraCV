@@ -13,7 +13,7 @@ export function extractCurriculumFields(text) {
     name: name.replace(phonePattern, "").trim(),
     email: text.match(emailPattern)?.[0] ?? "",
     phone: text.match(phonePattern)?.[0]?.trim() ?? "",
-    InterestRole: "",
-    Resumee: text.trim()
+    interestRole: "",
+    resumee: text.trim()
   };
 }

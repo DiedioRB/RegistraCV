@@ -1,10 +1,10 @@
-import usecurriculaController from "../controllers/useCurriculaController.js";
+import useCurriculaController from "../controllers/useCurriculaController.js";
 
 const formFields = [
   { name: "name", label: "Nome", required: true },
   { name: "email", label: "E-mail", type: "email", required: true },
   { name: "phone", label: "Telefone" },
-  { name: "InterestRole", label: "Cargo de interesse" }
+  { name: "interestRole", label: "Cargo de interesse" }
 ];
 
 export default function Form() {
@@ -16,16 +16,10 @@ export default function Form() {
     handleFieldChange,
     handleExtract,
     handleSubmit
-  } = usecurriculaController();
+  } = useCurriculaController();
 
   return (
-    <main className="container">
-      <header>
-        <p className="eyebrow">REGISTRACV</p>
-        <h1>Cadastro de currículo</h1>
-        <p className="intro">Extraia os dados de um PDF, revise os campos e envie para salvar.</p>
-      </header>
-
+    <>
       <form className="upload" onSubmit={handleSubmit}>
         <label htmlFor="file">Arquivo PDF (opcional)</label>
         <div className="controls">
@@ -57,11 +51,11 @@ export default function Form() {
           ))}
         </div>
 
-        <label className="field" htmlFor="Resumee">
+        <label className="field" htmlFor="resumee">
           Resumo profissional
           <textarea
-            id="Resumee"
-            name="Resumee"
+            id="resumee"
+            name="resumee"
             rows="6"
             value={fields.Resumee}
             onChange={handleFieldChange}
@@ -74,6 +68,6 @@ export default function Form() {
       </form>
 
       {message && <p className="message" role="status">{message}</p>}
-    </main>
+    </>
   );
 }

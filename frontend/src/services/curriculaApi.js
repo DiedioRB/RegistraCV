@@ -6,7 +6,7 @@ async function readResponse(response) {
   return result;
 }
 
-export async function listcurricula({ fetchImpl = fetch, baseUrl = API_URL } = {}) {
+export async function listCurricula({ fetchImpl = fetch, baseUrl = API_URL } = {}) {
   return readResponse(await fetchImpl(`${baseUrl}/curricula`));
 }
 

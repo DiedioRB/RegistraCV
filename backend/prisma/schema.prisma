@@ -7,13 +7,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model curricula {
+model Curricula {
   id           Int      @id @default(autoincrement())
   name         String   @db.NVarChar(255)
   email        String   @db.NVarChar(255)
   phone        String?  @db.NVarChar(255)
-  InterestRole String?  @db.NVarChar(255)
-  Resumee      String?  @db.NVarChar(Max)
+  interestRole String?  @db.NVarChar(255)
+  resumee      String?  @db.NVarChar(Max)
   filePath     String?  @db.NVarChar(500)
   createdAt    DateTime @default(now())
 }

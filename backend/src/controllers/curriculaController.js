@@ -3,7 +3,7 @@ import { prisma } from "../db.js";
 import { extractCurriculumFields as defaultExtractor } from "../extractors/curriculumExtractor.js";
 import { deleteStoredPdf, saveStoredPdf } from "../services/curriculaStorage.js";
 
-const curriculumFields = ["name", "email", "phone", "InterestRole", "Resumee"];
+const curriculumFields = ["name", "email", "phone", "interestRole", "resumee"];
 
 export function createCurriculaController({
   curriculumRepository = prisma.curricula,
@@ -46,7 +46,7 @@ export function createCurriculaController({
         );
         data.name = data.name?.trim() ?? "";
         data.email = data.email?.trim() ?? "";
-        for (const field of ["phone", "InterestRole", "Resumee"]) {
+        for (const field of ["phone", "interestRole", "resumee"]) {
           data[field] = data[field]?.trim() || null;
         }
 

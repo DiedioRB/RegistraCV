@@ -2,31 +2,22 @@ import { useCallback, useEffect, useState } from "react";
 import {
   createCurriculum,
   extractCurriculum,
-  listcurricula
 } from "../services/curriculaApi.js";
 
 const emptyFields = {
   name: "",
   email: "",
   phone: "",
-  InterestRole: "",
-  Resumee: ""
+  interestRole: "",
+  resumee: ""
 };
 
-export default function usecurriculaController() {
-  const [curricula, setcurricula] = useState([]);
+export default function useCurriculaController() {
+  const [curricula, setCurricula] = useState([]);
   const [fields, setFields] = useState(emptyFields);
   const [file, setFile] = useState(null);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const refreshcurricula = useCallback(async () => {
-    setcurricula(await listcurricula());
-  }, []);
-
-  useEffect(() => {
-    refreshcurricula().catch((error) => setMessage(error.message));
-  }, [refreshcurricula]);
 
   function handleFileChange(event) {
     setFile(event.target.files?.[0] ?? null);
@@ -76,7 +67,6 @@ export default function usecurriculaController() {
       setFile(null);
       form.reset();
       setMessage("Currículo salvo com sucesso.");
-      await refreshcurricula();
     } catch (error) {
       setMessage(error.message);
     } finally {

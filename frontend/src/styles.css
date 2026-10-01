@@ -8,7 +8,11 @@
 * { box-sizing: border-box; }
 body { margin: 0; min-width: 320px; min-height: 100vh; }
 .container { width: min(760px, calc(100% - 32px)); margin: 72px auto; }
-header { margin-bottom: 36px; }
+.app-header { margin-bottom: 36px; }
+.page-navigation { display: flex; justify-content: flex-end; gap: 10px; margin: -16px 0 24px; }
+.nav-button { display: inline-flex; align-items: center; justify-content: center; border-radius: 9px; padding: 12px 18px; background: #e9edff; color: #344bb9; font-weight: 700; text-decoration: none; }
+.nav-button.active { background: #4056d6; color: white; }
+.nav-button:focus-visible { outline: 3px solid #9aa7f5; outline-offset: 2px; }
 .eyebrow { color: #5067d8; font-size: 12px; font-weight: 800; letter-spacing: .16em; }
 h1 { margin: 8px 0; font-size: clamp(32px, 6vw, 48px); letter-spacing: -.04em; }
 .intro, .empty { color: #677386; }
