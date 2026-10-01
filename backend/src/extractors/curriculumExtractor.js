@@ -1,5 +1,5 @@
 const emailPattern = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i;
-const phonePattern = /(?:\+?\d[\d\s().-]{7,}\d)/;
+const phonePattern = /\((?:\+?\d[\d\s().-]{7,}\d)/;
 const headingPattern = /^(curr[ií]culo|curriculum vitae|curriculum|resume|cv)$/i;
 
 export function extractCurriculumFields(text) {
