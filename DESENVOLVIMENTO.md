@@ -24,6 +24,7 @@ O uso de LLMs foi utilizado para:
 - Estrutura inicial do projeto, minimizando tempo de instalação de ferramentas e bibliotecas manualmente.
 - Estilização do sistema, pois é a parte que mais demandaria tempo para desenvolver.
 - Atividades repetitivas: autocomplete foi utilizado para criar loops, alterar variáveis, corrigir imports, etc.
+- Criação dos testes via Jest: outro ponto que poderia levar algum tempo de desenvolvimento e foi simplificado com uso de IA.
 
 Nem todas as sugestões de IA foram inteiramente úteis, algumas tendo que ser descartadas por incluírem práticas ruins de modelagem ou gerarem conflitos.
 
@@ -44,4 +45,3 @@ Como descrito anteriormente, o sistema possui somente e estritamente o que foi s
 - Paginação das consultas;
 - Agregação de currículos enviados por um usuário diversas vezes (consulta a partir de e-mail, por exemplo);
 - Marca de "Currículo visto" para facilitar o gerenciamento dos cadastros;
-- Adicionar testes automatizados: como o sistema é relativamente pequeno, não foi realizado desenvolvimento TDD, mas ele pode ser facilmente colocado em ambas as frontes do sistema sem afetar o fluxo utilizando JEST, por exemplo.

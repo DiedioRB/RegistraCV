@@ -1,12 +1,16 @@
 import { Router } from "express";
-import { curriculaController as curriculaController } from "../controllers/curriculaController.js";
+import { curriculaController } from "../controllers/curriculaController.js";
 import uploadPdf from "../middleware/uploadPdf.js";
 
-const router = Router();
+export function createCurriculaRouter(controller = curriculaController) {
+  const router = Router();
 
-router.get("/", curriculaController.list);
-router.get("/:id/pdf", curriculaController.downloadPdf);
-router.post("/extract", uploadPdf.single("file"), curriculaController.extract);
-router.post("/", uploadPdf.single("file"), curriculaController.create);
+  router.get("/", controller.list);
+  router.get("/:id/pdf", controller.downloadPdf);
+  router.post("/extract", uploadPdf.single("file"), controller.extract);
+  router.post("/", uploadPdf.single("file"), controller.create);
 
-export default router;
+  return router;
+}
+
+export default createCurriculaRouter();

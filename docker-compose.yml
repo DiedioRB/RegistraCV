@@ -30,7 +30,15 @@ services:
         - action: rebuild
           path: ./backend/package.json
         - action: rebuild
+          path: ./backend/package-lock.json
+        - action: rebuild
           path: ./backend/Dockerfile
+        - action: sync
+          path: ./backend/tests
+          target: /app/tests
+          initial_sync: true
+        - action: rebuild
+          path: ./backend/jest.config.js
         - action: rebuild
           path: ./backend/prisma
     environment:

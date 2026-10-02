@@ -7,7 +7,8 @@
     "start": "node src/server.js",
     "dev": "nodemon --watch src src/server.js",
     "db:push": "prisma db push",
-    "db:generate": "prisma generate"
+    "db:generate": "prisma generate",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand"
   },
   "dependencies": {
     "@google/genai": "^2.25.0",
@@ -19,7 +20,9 @@
     "pdf-parse": "^1.1.1"
   },
   "devDependencies": {
+    "jest": "^30.5.0",
     "nodemon": "^3.1.10",
-    "prisma": "^6.19.0"
+    "prisma": "^6.19.0",
+    "supertest": "^7.1.4"
   }
 }

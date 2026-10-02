@@ -45,3 +45,14 @@ As configurações de portas podem ser alteradas a partir do arquivo ```.env```.
 - `POST /api/curricula`: salva os campos enviados. Se incluir `file`, o PDF é salvo em `backend/storage` com nome UUID e seu caminho fica na linha correspondente.
 - `GET /api/curricula`: lista currículos cadastrados.
 - `GET /api/health`: verifica a conexão com o banco.
+
+## Testes da API
+
+Os testes HTTP usam Jest e Supertest fora do ambiente dockerizado. Para executá-los localmente:
+```bash
+    cd backend
+    npm install
+    npm test
+```
+
+Os testes usam um repositório simulado; não precisam de conexão com o SQL Server.
