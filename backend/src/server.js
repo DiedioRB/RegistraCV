@@ -1,7 +1,7 @@
 import app from "./app.js";
 import { prisma } from "./db.js";
 
-const port = Number(process.env.PORT ?? 3000);
+const port = Number(process.env.SERVER_PORT ?? 3000);
 const server = app.listen(port, () => console.log(`Backend disponível na porta ${port}.`));
 
 const shutdown = async () => {

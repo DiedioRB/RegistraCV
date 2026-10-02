@@ -1,7 +1,7 @@
 const emailPattern = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i;
 const phonePattern = /\((?:\+?\d[\d\s().-]{7,}\d)/;
 const headingPattern = /^(curr[ií]culo|curriculum vitae|curriculum|resume|cv)$/i;
-const interestRolePattern = /(?:cargo|posição|função|role|position|job|área)\s*[:\-]?\s*(.+)/i;
+const interestRolePattern = /(?:cargo|posição|função|role|position|job|área|area)\s*[:\-]?\s*(.+)/i;
 
 export function extractCurriculumFields(text) {
   const lines = text

@@ -10,6 +10,10 @@ export async function listCurricula({ fetchImpl = fetch, baseUrl = API_URL } = {
   return readResponse(await fetchImpl(`${baseUrl}/curricula`));
 }
 
+export function curriculumPdfUrl(id, baseUrl = API_URL) {
+  return `${baseUrl}/curricula/${id}/pdf`;
+}
+
 export async function extractCurriculum(formData, {
   fetchImpl = fetch,
   baseUrl = API_URL

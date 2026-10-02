@@ -6,7 +6,7 @@ services:
       MSSQL_PID: Developer
       MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD:-RegistraCV!Dev2026}
     ports:
-      - "1433:1433"
+      - "${DB_PORT:-1433}:1433"
     volumes:
       - sqlserver_data:/var/opt/mssql
     healthcheck:
@@ -34,15 +34,15 @@ services:
         - action: rebuild
           path: ./backend/prisma
     environment:
-      PORT: 3000
+      PORT: ${SERVER_PORT:-3000}
       DB_HOST: database
-      DB_PORT: 1433
+      DB_PORT: ${DB_PORT:-1433}
       DB_NAME: ${DB_NAME:-RegistraCV}
       DB_USER: sa
       DB_PASSWORD: ${MSSQL_SA_PASSWORD:-RegistraCV!Dev2026}
-      DATABASE_URL: "sqlserver://database:1433;database=${DB_NAME:-RegistraCV};user=sa;password=${MSSQL_SA_PASSWORD:-RegistraCV!Dev2026};encrypt=true;trustServerCertificate=true"
+      DATABASE_URL: "sqlserver://database:${DB_PORT:-1433};database=${DB_NAME:-RegistraCV};user=sa;password=${MSSQL_SA_PASSWORD:-RegistraCV!Dev2026};encrypt=true;trustServerCertificate=true"
     ports:
-      - "3000:3000"
+      - "${SERVER_PORT:-3000}:3000"
     volumes:
       - ./backend/storage:/app/storage
     depends_on:
@@ -70,9 +70,9 @@ services:
         - action: rebuild
           path: ./frontend/vite.config.js
     environment:
-      VITE_API_URL: http://localhost:3000/api
+      VITE_API_URL: http://localhost:${SERVER_PORT:-3000}/api
     ports:
-      - "5173:5173"
+      - "${CLIENT_PORT:-8000}:5173"
     depends_on:
       - backend
     restart: unless-stopped

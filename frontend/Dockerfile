@@ -3,6 +3,6 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-EXPOSE 8080
+EXPOSE ${CLIENT_PORT:-8000}
 CMD ["npm", "run", "dev"]
 

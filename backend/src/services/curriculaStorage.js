@@ -9,13 +9,20 @@ export async function saveStoredPdf(buffer) {
   const fileName = `${randomUUID()}.pdf`;
   const absolutePath = path.join(storageDirectory, fileName);
   await writeFile(absolutePath, buffer, { flag: "wx" });
-  return path.posix.join("storage", fileName);
+  return fileName;
 }
 
-export async function deleteStoredPdf(relativePath) {
-  const absolutePath = path.resolve(process.cwd(), relativePath);
+export function resolveStoredPdf(relativePath) {
+
+  const absolutePath = path.resolve(storageDirectory, `${relativePath}`);
+  console.log("resolveStoredPdf", { relativePath, absolutePath, storageDirectory });
   if (path.dirname(absolutePath) !== storageDirectory) {
     throw new Error("Caminho de arquivo fora da pasta storage.");
   }
+  return absolutePath;
+}
+
+export async function deleteStoredPdf(relativePath) {
+  const absolutePath = resolveStoredPdf(relativePath);
   await rm(absolutePath, { force: true });
 }

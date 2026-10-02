@@ -1,6 +1,0 @@
-- Improve listing
-    - Add a button to see the submitted PDF
-    - Add a dropdown/modal button to show the resumee
-    - Fix database line breaks for resumee
-- Improve overall styling
-- Add a new extractor for Gemini Services

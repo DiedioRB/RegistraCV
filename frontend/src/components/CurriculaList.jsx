@@ -1,3 +1,5 @@
+import { curriculumPdfUrl } from "../services/curriculaApi.js";
+
 export default function CurriculaList({ curricula, loading = false, message = "" }) {
   return (
     <section className="curricula-section" aria-labelledby="curricula-heading">
@@ -26,9 +28,32 @@ export default function CurriculaList({ curricula, loading = false, message = ""
                   {new Date(curriculum.createdAt).toLocaleDateString("pt-BR")}
                 </time>
               </div>
-              {curriculum.resumee && (
-                <p className="curriculum-summary">{curriculum.resumee}</p>
-              )}
+              <div className="curriculum-actions">
+                {curriculum.resumee && (
+                  <details className="academic-dropdown">
+                    <summary>Formação acadêmica</summary>
+                    <div className="academic-content">
+                      {
+                        curriculum.resumee.split("\n").map((line, index) => (
+                          <p key={index}>{line}</p>
+                        ))
+                      }
+                    </div>
+                  </details>
+                )}
+                {curriculum.hasPdf && (
+                  <a
+                    className="pdf-link"
+                    href={curriculumPdfUrl(curriculum.id)}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`Abrir PDF de ${curriculum.name}`}
+                    title="Abrir ou baixar PDF"
+                  >
+                    ↗ PDF
+                  </a>
+                )}
+              </div>
             </li>
           ))}
         </ul>

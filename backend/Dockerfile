@@ -6,5 +6,5 @@ COPY prisma ./prisma
 RUN npx prisma generate
 COPY src ./src
 COPY scripts ./scripts
-EXPOSE 3000
+EXPOSE ${SERVER_PORT:-3000}
 CMD ["sh", "-c", "node scripts/init-database.js && npx prisma db push && npm run dev"]
