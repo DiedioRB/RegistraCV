@@ -1,25 +1,42 @@
 # RegistraCV
 
-Aplicação de desenvolvimento com três serviços: frontend React/Vite, API Node/Express e Microsoft SQL Server. O backend extrai dados de currículos usando um extrator substituível, e persiste os dados confirmados no formulário com Prisma ORM.
+Plataforma de registro de currículos desenvolvida com as tecnologias:
 
-## Iniciar em desenvolvimento
+**Backend:**
+- NodeJS 20 (imagem em Alpine Linux)
+- Prisma ^6.19
+    - ORM e migração do banco de dados
+- MS SQL Server 2022
 
-Requer Docker Desktop com Docker Compose 2.22 ou superior. Na raiz do projeto, use o modo watch para aplicar alterações automaticamente:
+**Frontend:**
+- React ^19.1
+- Vite 7.1.5 (plugin para React ^5.0)
+    - Build tool para frontend
 
+## Como executar
+
+O sistema roda inteiramente usando Docker. Verifique as formas de instalação de acordo com seu sistema operacional [aqui](https://docs.docker.com/engine/install/).
+Como o Docker realiza a instalação das tecnologias internamente, não há necessidade de instalação externa de nenhuma ferramenta.
+
+Alterações em código frontend/backend são sincronizadas com os containers e aplicadas pelo Vite/Nodemon.
+Para executar em ambiente de desenvolvimento com atualização a cada mudança realizada, execute:
 ```sh
 docker compose up --watch
 ```
 
-Alterações em código frontend/backend são sincronizadas com os containers e aplicadas pelo Vite/Nodemon. Mudanças nas dependências, configurações de build ou schema do Prisma disparam rebuild automático do serviço correspondente. `docker compose up` continua iniciando os serviços sem observar alterações.
+Caso não haja necessidade de monitoramento de mudanças, use o comando:
+```sh
+docker compose up
+```
 
-Na primeira inicialização, o SQL Server pode levar alguns instantes para ficar pronto. O backend aguarda a base, cria o database configurado e sincroniza as tabelas com Prisma.
+Para acessar as diferentes partes do sistema, utilize as seguintes portas:
 
-- Frontend: http://localhost:5173
+- Frontend: http://localhost:8000
 - API: http://localhost:3000/api
 - Health check: http://localhost:3000/api/health
 - SQL Server: localhost:1433
 
-A senha de desenvolvimento pode ser alterada no ambiente ou em um arquivo `.env` criado a partir de `.env.example`. O volume `sqlserver_data` mantém os dados entre reinicializações.
+As configurações de portas podem ser alteradas a partir do arquivo ```.env```.
 
 ## Fluxo de currículo
 
@@ -28,6 +45,3 @@ A senha de desenvolvimento pode ser alterada no ambiente ou em um arquivo `.env`
 - `POST /api/curricula`: salva os campos enviados. Se incluir `file`, o PDF é salvo em `backend/storage` com nome UUID e seu caminho fica na linha correspondente.
 - `GET /api/curricula`: lista currículos cadastrados.
 - `GET /api/health`: verifica a conexão com o banco.
-
-O extrator padrão por regex está em `backend/src/extractors/curriculumExtractor.js` e pode ser substituído ao criar o controller.
-Os PDFs enviados junto ao formulário final permanecem na pasta `backend/storage`, montada como volume no container do backend.
